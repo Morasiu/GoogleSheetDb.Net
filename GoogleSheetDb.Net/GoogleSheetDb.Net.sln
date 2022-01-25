@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleSheetDb.Net.Core", "GoogleSheetDb.Net.Core\GoogleSheetDb.Net.Core.csproj", "{7C49CD00-9D6B-4E60-8C2A-0A6629A1DB21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleSheetDb.Net.UnitTests", "GoogleSheetDb.Net.UnitTests\GoogleSheetDb.Net.UnitTests.csproj", "{F49E4934-2261-4CD6-B532-5D55F6C980D2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C49CD00-9D6B-4E60-8C2A-0A6629A1DB21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C49CD00-9D6B-4E60-8C2A-0A6629A1DB21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C49CD00-9D6B-4E60-8C2A-0A6629A1DB21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C49CD00-9D6B-4E60-8C2A-0A6629A1DB21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F49E4934-2261-4CD6-B532-5D55F6C980D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F49E4934-2261-4CD6-B532-5D55F6C980D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F49E4934-2261-4CD6-B532-5D55F6C980D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F49E4934-2261-4CD6-B532-5D55F6C980D2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
