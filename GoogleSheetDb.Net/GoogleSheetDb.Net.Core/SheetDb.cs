@@ -1,6 +1,7 @@
 ﻿using Google.Apis.Auth.OAuth2;
 using Google.Apis.Services;
 using Google.Apis.Sheets.v4;
+using Google.Apis.Sheets.v4.Data;
 using GoogleSheetDb.Net.Core.Extensions;
 using GoogleSheetDb.Net.Core.Queries;
 
@@ -11,7 +12,7 @@ public class SheetDb {
 	public bool IsAuthenticated { get; private set; }
 	public SheetsService? Service { get; private set; }
 
-	public Scheme.Scheme Scheme { get; private set; }
+	//public Scheme.Scheme Scheme { get; private set; }
 
 	public SheetDb(SheetDbOptions options) {
 		if (options.SpreadsheetId.IsNullOrEmpty())
@@ -24,7 +25,7 @@ public class SheetDb {
 		_options = options;
 	}
 
-	public IEnumerable<T> GetAll<T>() {
+	public async Task<IEnumerable<T>> GetAllAsync<T>() {
 		if (!IsAuthenticated) Authenticate();
 
 		// var sheets = Service!.Spreadsheets.Get(_options.SpreadsheetId).Execute().Sheets;
@@ -32,7 +33,7 @@ public class SheetDb {
 		var type = typeof(T);
 		var properties = type.GetProperties();
 		var query = new QueryBuilder().From(SheetColumn.A).To((SheetColumn) properties.Length).Build();
-		var data = Service.Spreadsheets.Values.Get(_options.SpreadsheetId, query).Execute();
+		var data = await Service!.Spreadsheets.Values.Get(_options.SpreadsheetId, query).ExecuteAsync();
 		var values = data.Values;
 		var all = new List<T>();
 		for (int i = 1; i < values.Count; i++) {
@@ -85,4 +86,12 @@ public class SheetDb {
 	// 	
 	// 	return true;
 	// }
+	public async Task AddAsync<T>(T entity) {
+		var valueRange = ValueRangeExtensions.FromObject(entity);
+		var properties = typeof(T).GetProperties();
+		var query = new QueryBuilder().From(SheetColumn.A).To((SheetColumn) properties.Length).Build();
+		var request = Service!.Spreadsheets.Values.Append(valueRange, _options.SpreadsheetId, query);
+		request.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
+		await request.ExecuteAsync();
+	}
 }
